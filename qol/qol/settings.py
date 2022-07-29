@@ -1,5 +1,4 @@
 from pathlib import Path
-from .my_settings import myDATABASES, mySECRET_KEY
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -9,7 +8,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = mySECRET_KEY
+SECRET_KEY = 'django-insecure-s-!ly69k6v9@xh2w)!79^j-92tgq$x=u@ml6)c!yj$c6!7@b!$'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -28,7 +27,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'appqol',
     'accounts',
-    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -65,7 +63,12 @@ WSGI_APPLICATION = 'qol.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = myDATABASES
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 
 # Password validation
@@ -102,7 +105,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
